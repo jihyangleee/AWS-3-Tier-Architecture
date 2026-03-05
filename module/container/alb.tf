@@ -4,12 +4,12 @@ resource "aws_lb" "alb" {
     load_balancer_type= "application"
     security_groups = [aws_security_group.alb_security_group.id]
 
-    tags = merge{
+    tags = merge(
         var.tags,
         {
             name= "${var.environment}-alb"
         }
-    }
+    )
 }
 
 resource "aws_lb_target_group" "alb_target_group"{
