@@ -12,9 +12,13 @@ module "data" {
 }
 
 module "application" {
-    source ="../module/container"
-    subnet_ids= module.network.private_subnets_application_ids
+    source = "../module/application"
     vpc_id = module.network.vpc_id
+    public_subnet_ids = module.network.public_subnets_ids
+    private_subnet_ids = module.network.private_subnets_application_ids
+    application_security_group_ids = module.network.application_security_group_ids
+    bastion_security_group_ids = module.network.bastion_security_group_ids
+    lb_security_group_ids = module.network.lb_security_group_ids
     environment = var.environment
 }
 

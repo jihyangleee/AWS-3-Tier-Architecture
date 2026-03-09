@@ -132,7 +132,7 @@ flowchart TB
 ├── module/
 │   ├── network/             # VPC, Subnet, NAT, IGW, Route Tables, NACL
 │   ├── application/         # EC2, ALB, Auto Scaling
-│   ├── container/           # ECS, ECR (staging용)
+│   ├── container/           # ECS, ECR (미사용)
 │   └── data/                # RDS, Subnet Group
 └── docs/                    # Documentation
 ```
@@ -183,10 +183,7 @@ flowchart TB
 - **RDS**: Isolated Subnet에 위치, Application 계층에서만 접근 가능
 - **ALB**: AWS WAF로 보호, HTTPS 지원
 
-## � References
 
-- [Building a Secure and Scalable Three-Tier Architecture on AWS using CloudFormation](https://repost.aws/articles/ARGpERJ3jISbOAlnmfVUsvMQ/building-a-secure-and-scalable-three-tier-architecture-on-aws-using-cloudformation) - AWS Community
-- [Terraform-3-Tier-Architecture](https://github.com/yaini/Terraform-3-Tier-Architecture) - yaini
 
 ## �📝 License
 
