@@ -36,7 +36,7 @@ resource "aws_route_table" "private_route_table_1" {
 resource "aws_route" "private_route_1" {
   route_table_id         = aws_route_table.private_route_table_1.id
   destination_cidr_block = var.entire_cidr_block
-  nat_gateway_id         = aws_nat_gateway.nat_gateway_1.id
+  nat_gateway_id         = aws_nat_gateway.nat_gateway.id
 }
 
 resource "aws_route_table_association" "private_route_table_association_1" {
@@ -59,7 +59,7 @@ resource "aws_route_table" "private_route_table_2" {
 resource "aws_route" "private_route_2" {
   route_table_id         = aws_route_table.private_route_table_2.id
   destination_cidr_block = var.entire_cidr_block
-  nat_gateway_id         = aws_nat_gateway.nat_gateway_2.id
+  nat_gateway_id         = aws_nat_gateway.nat_gateway.id
 }
 
 resource "aws_route_table_association" "private_route_table_association_2" {

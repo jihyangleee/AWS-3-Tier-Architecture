@@ -1,9 +1,9 @@
 variable "vpc_cidr_block"{
-    default = "10.0.0.0/16"
+    default = "172.16.0.0/16"
 }
 
 variable "subnet_cidr_block" {
-  default = "10.0.x.0/24"
+  default = "172.16.x.0/24"
 }
 
 variable "entire_cidr_block" {

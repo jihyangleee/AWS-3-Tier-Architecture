@@ -22,7 +22,7 @@ resource "aws_launch_template" "application" {
     image_id = data.aws_ami.amazon_linux.id
     vpc_security_group_ids= var.application_security_group_ids
     key_name= local.ec2_key_pair_name
-    user_data = filebase64("./script/install_apache.sh")
+    user_data = filebase64("./script/install_apach.sh")
     # user_data 속 .sh 파일은 인스턴스가 생성되면서 실행된다. 
 
     tags = merge(
