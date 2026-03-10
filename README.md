@@ -50,7 +50,7 @@ flowchart TB
                 
                 ALB[⚖️ Application Load Balancer]
                 ASG[Auto Scaling Group]
-                RT[Route Table<br/>172.16.0.0<br/>172.16.1.0<br/>172.16.2.0]
+                RT[Route Table<br/>172.16.0.0/16 → local<br/>0.0.0.0/0 → IGW/NAT]
                 NACL[🔒 Network ACL]
             end
         end

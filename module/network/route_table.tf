@@ -18,7 +18,7 @@ resource "aws_route" "public_route"{
 
 resource "aws_route_table_association" "public_route_table_associations"{
     count = var.public_subnet_count
-    subnet_id = aws_subnet.public_subnets.*.id[count.index]
+    subnet_id = aws_subnet.public_subnets[count.index].id
     route_table_id = aws_route_table.public_route_table.id
 }
 # private route table 1 (AZ 1)

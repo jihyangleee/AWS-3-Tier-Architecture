@@ -1,26 +1,25 @@
-#launch template
-#bastion
-resource "aws_launch_template" "bastion" {
-    name_prefix = "bastion"
-    instance_type= local.instance_type
-    image_id= data.aws_ami.amazon_linux.id
+# Bastion EC2 (단일 인스턴스)
+resource "aws_instance" "bastion" {
+    ami                    = data.aws_ami.amazon_linux.id
+    instance_type          = local.instance_type
+    subnet_id              = var.public_subnet_ids[0]
     vpc_security_group_ids = var.bastion_security_group_ids
-    key_name= local.ec2_key_pair_name
+    key_name               = local.ec2_key_pair_name
 
     tags = merge(
         var.tags,
         {
-            "name" = "${var.environment}-bastion"
+            "Name" = "${var.environment}-bastion"
         }
     )
 }
 
-#application
+# Application Launch Template
 resource "aws_launch_template" "application" {
     name_prefix = "application"
     instance_type= local.instance_type
     image_id = data.aws_ami.amazon_linux.id
-    vpc_security_group_ids= var.application_security_group_ids
+    vpc_security_group_ids= var.application_security_group_ids  #application 단의 ec2가 생성되기에 application sg 적용 
     key_name= local.ec2_key_pair_name
     user_data = filebase64("./script/install_apach.sh")
     # user_data 속 .sh 파일은 인스턴스가 생성되면서 실행된다. 
@@ -31,21 +30,6 @@ resource "aws_launch_template" "application" {
             "name" = "${var.environment}-application"
         }
     )
-}
-
-
-#auto scaling group
-# - bastion
-resource "aws_autoscaling_group" "autoscaling_group_bastion" {
-    name ="application-group-bastion"
-    vpc_zone_identifier = var.public_subnet_ids
-    min_size= 1
-    max_size =1
-    desired_capacity= 1
-    launch_template {
-        id= aws_launch_template.bastion.id
-        version="$Latest"
-    }
 }
 
 # - application
