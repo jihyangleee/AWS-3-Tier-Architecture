@@ -11,17 +11,17 @@ flowchart TB
     end
     
     subgraph AWS["AWS Cloud"]
-        subgraph Region["Region - ap-northeast-2"]
+        subgraph Region["Region: ap-northeast-2"]
             IGW[Internet Gateway]
             
             subgraph VPC["VPC - 172.16.0.0/16"]
-                subgraph AZ1["Availability Zone - ap-northeast-2a"]
+                subgraph AZ1["AZ: 2a"]
                     subgraph PUB1["Public Subnet"]
                         PUB1_CIDR[/"172.16.1.0/24"/]
                         BASTION[🖥️ Bastion]
                     end
                     
-                    subgraph PRIV1["Private Subnet - Application"]
+                    subgraph PRIV1["Private Subnet - App"]
                         PRIV1_CIDR[/"172.16.10.0/24"/]
                         APP1[🖥️ EC2]
                     end
@@ -32,13 +32,13 @@ flowchart TB
                     end
                 end
                 
-                subgraph AZ2["Availability Zone - ap-northeast-2c"]
+                subgraph AZ2["AZ: 2c"]
                     subgraph PUB2["Public Subnet"]
                         PUB2_CIDR[/"172.16.2.0/24"/]
                         NAT[🔄 NAT Gateway]
                     end
                     
-                    subgraph PRIV2["Private Subnet - Application"]
+                    subgraph PRIV2["Private Subnet - App"]
                         PRIV2_CIDR[/"172.16.11.0/24"/]
                         APP2[🖥️ EC2]
                     end
@@ -53,9 +53,10 @@ flowchart TB
                 ASG[Auto Scaling Group]
             end
 
-            subgraph RT["Route Tables - Egress"]
-                RT_PUB["Public RT: 0.0.0.0/0 → IGW"]
-                RT_PRIV["Private RT: 0.0.0.0/0 → NAT"]
+            subgraph RT["Route Tables"]
+                RT_LOCAL["All: 172.16.0.0/16 → local"]
+                RT_PUB["Public: 0.0.0.0/0 → IGW"]
+                RT_PRIV["Private: 0.0.0.0/0 → NAT"]
             end
         end
     end
@@ -89,6 +90,7 @@ flowchart TB
     style DATA1_CIDR fill:#ffffff,stroke:#DC143C
     style DATA2_CIDR fill:#ffffff,stroke:#DC143C
     style RT fill:#FFF8DC,stroke:#DAA520
+    style RT_LOCAL fill:#FFFACD,stroke:#DAA520
     style RT_PUB fill:#FFFACD,stroke:#DAA520
     style RT_PRIV fill:#FFFACD,stroke:#DAA520
 ```
