@@ -18,7 +18,7 @@ resource "aws_lb" "application_loadbalancer"{
 
 # 로드 밸런서가 보내는 target 목적지 
 resource "aws_lb_target_group" "application_loadbalancer_target_group" {
-    name ="application_loadbalancer_tg"
+    name ="application-loadbalancer-tg"
     port = 80 #서버가 대기하는 포트
     protocol = "HTTP"
     vpc_id = var.vpc_id

@@ -1,7 +1,5 @@
 # NAT Gateway (Public Subnet 2)
 resource "aws_eip" "nat_eip" {
-    domain = "vpc"
-
     lifecycle {
         create_before_destroy = true
     }
